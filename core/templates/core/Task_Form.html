@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+
+            <form action="{% url 'create_task' %}" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <hr>
+
+                <input type="submit" class="btn btn-sm btn-primary" name="submit">
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

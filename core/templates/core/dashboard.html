@@ -1,0 +1,389 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+</div>
+{% include 'core/status.html' %}
+<!-- Content Row -->
+<br>
+<div class="row">
+    <!-- Create Staff Card -->
+    <div class="col-xl-6 col-lg-6 mb-4">
+        <h5>Staffs</h5>
+        <hr>
+        <div class="card shadow">
+            <!-- Card Header -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-primary">
+                <!-- Button to Create Staff -->
+                <button class="btn text-light" style="font-weight:bold;">Create Staff</button>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- Table to display staff information -->
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Staff</th>
+                            <th>Phone</th>
+                            <th>Date of Birth</th>
+                        </tr>
+
+                        {% for staff in staffs %}
+                            <tr>
+                                <td><a class="btn btn-sm btn-primary" href="{% url 'staff' staff.id %}">view</a> </td>
+                                <td>{{staff.name}}</td>
+                                <td>{{staff.Phone}}</td>
+                                <td>{{staff.birth_date}}</td>
+                            </tr>
+                        {% endfor %}
+                    </thead>
+
+
+                    <!-- You can add table rows here -->
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Last 5 Work-Order Card -->
+    <div class="col-xl-6 col-lg-6 mb-4">
+        <h5>Ranked 5 Work-Order</h5>
+        <hr>
+        <div class="card shadow">
+            <!-- Card Header -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-primary">
+                <a style="font-weight:bold;  text-align:center; " href="{% url 'create_order' %}"><h6 class="text-light" style=" text-align:center; ">create order</h6></a>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- Table to display last 5 work orders -->
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Status</th>
+                            <th>Task</th>
+                            <th>Update</th>
+                            <th>Remove</th>
+                            <!-- Add more table headers as needed -->
+                        </tr>
+
+                         {% for order in orders %}
+                            <tr>
+                                <th>{{order.assigned_to}}</th>
+                                <td>{{order.Title}}</td>
+                                <td>{{order.status}}</td>
+                                <td>{{order.tasks}}</td>
+                                <td><a class="btn btn-sm btn-primary" href="{% url 'update_order' order.id%}" >update</a></td>
+                                <td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id%}">Delete</a></td>
+                            </tr>
+                        {% endfor %}
+
+                    </thead>
+                    <tbody>
+                        <!-- Table rows with work order information -->
+                        <!-- Add rows dynamically or populate from backend -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'core/charts.html' %}
+
+
+<!-- Content Row -->
+<div class="row">
+
+<!-- Content Column -->
+<div class="col-lg-6 mb-4">
+
+<!-- Project Card Example -->
+<div class="card shadow mb-4">
+<div class="card-header py-3 bg-primary">
+<h6 class="m-0 font-weight-bold text-light">Task Track</h6>
+</div>
+<div class="card-body">
+<h4 class="small font-weight-bold">Top Priority Task<span
+class="float-right">{{top_percent}}%</span></h4>
+<div class="progress mb-4">
+<div class="progress-bar {{top_color}}" role="progressbar" style="width: {{ top_percent }}%"
+aria-valuenow="{{ top_percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<h4 class="small font-weight-bold">Pending Task<span
+class="float-right">{{ pending_percent }}%</span></h4>
+<div class="progress mb-4">
+<div class="progress-bar {{pending_color}}" role="progressbar" style="width: {{ pending_percent }}%"
+aria-valuenow="{{ pending_percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<h4 class="small font-weight-bold"> Less Priority Task <span
+class="float-right">{{ less_percent }}%</span></h4>
+<div class="progress mb-4">
+<div class="progress-bar {{less_color}} " role="progressbar" style="width: {{less_percent }}%"
+aria-valuenow="{{less_percent}}" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<h4 class="small font-weight-bold">Task In-progress<span
+class="float-right">{{ In_progress_percent }}%</span></h4>
+<div class="progress mb-4">
+<div class="progress-bar {{InProgess_color}}" role="progressbar" style="width: {{In_progress_percent }}%"
+aria-valuenow="{{ In_progress_percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<h4 class="small font-weight-bold">Finished Task<span
+class="float-right">{{finished_percent}}%</span></h4>
+<div class="progress">
+<div class="progress-bar {{finished_color}}" role="progressbar" style="width: {{ finished_percent }}%"
+aria-valuenow="{{ finished_percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+</div>
+</div>
+
+<!-- Color System -->
+<div class="row">
+<div class="col-lg-6 mb-4">
+<div class="card bg-primary text-white shadow">
+<div class="card-body">
+Primary
+<div class="text-white-50 small">#4e73df</div>
+</div>
+</div>
+</div>
+<div class="col-lg-6 mb-4">
+<div class="card bg-success text-white shadow">
+<div class="card-body">
+Success
+<div class="text-white-50 small">#1cc88a</div>
+</div>
+</div>
+</div>
+<div class="col-lg-6 mb-4">
+<div class="card bg-info text-white shadow">
+<div class="card-body">
+Info
+<div class="text-white-50 small">#36b9cc</div>
+</div>
+</div>
+</div>
+<div class="col-lg-6 mb-4">
+<div class="card bg-warning text-white shadow">
+<div class="card-body">
+Warning
+<div class="text-white-50 small">#f6c23e</div>
+</div>
+</div>
+</div>
+<div class="col-lg-6 mb-4">
+<div class="card bg-danger text-white shadow">
+<div class="card-body">
+Danger
+<div class="text-white-50 small">#e74a3b</div>
+</div>
+</div>
+</div>
+<div class="col-lg-6 mb-4">
+<div class="card bg-secondary text-white shadow">
+<div class="card-body">
+Secondary
+<div class="text-white-50 small">#858796</div>
+</div>
+</div>
+</div>
+<div class="col-lg-6 mb-4">
+<div class="card bg-light text-black shadow">
+<div class="card-body">
+Light
+<div class="text-black-50 small">#f8f9fc</div>
+</div>
+</div>
+</div>
+<div class="col-lg-6 mb-4">
+<div class="card bg-dark text-white shadow">
+<div class="card-body">
+Dark
+<div class="text-white-50 small">#5a5c69</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="col-lg-6 mb-4">
+
+<!-- Illustrations -->
+<div class="card shadow mb-4">
+<div class="card-header py-3 align-items-center justify-content-between bg-dark">
+<a class="btn btn-sm btn-dark" href="{% url 'create_task' %}"><h6 class="m-0 font-weight-bold text-light" style="text-align: center; justify-content: space-between; ">Create Task</h6></a>
+</div>
+<div class="card-body">
+<table class="table table-sm">
+    <thead>
+     <tr>
+         <th>Task</th>
+         <th>Priority</th>
+         <th>Status</th>
+         <th>Created</th>
+         <th>Due Date</th>
+         <th>Update</th>
+         <th>Remove</th>
+     </tr>
+
+     {% for task in Tasks %}
+          <tr>
+             <td>{{task.title}}</td>
+             <td>{{task.priority}}</td>
+             <td>{{task.status}}</td>
+             <td>{{task.created_date}}</td>
+             <td>{{task.Due_date}}</td>
+              <td><a class="btn btn-sm btn-warning" href="{% url 'update_task' task.id%}">Update</a></td>
+             <td><a class="btn btn-sm btn-danger" href="{% url 'delete_task' task.id%}">Remove</a></td>
+
+          </tr>
+
+     {% endfor %}
+
+
+    </thead>
+
+</table>
+</div>
+</div>
+
+<!-- Approach -->
+<div class="card shadow mb-4">
+<div class="card-header py-3">
+<h6 class="m-0 font-weight-bold text-primary">Staff Messages</h6>
+</div>
+<div class="card-body">
+  <h5>activity</h5>
+    <ul>
+        {% for act in acts %}
+             <li>{{ act.user.username }}-{{ act.activity_type }} at {{act.timestamp }}</li>
+        {% endfor %}
+    </ul>
+</div>
+</div>
+
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
+<script src="{% static  'js/demo/chart-pie-demo.js' %}"></script>
+<script src="{% static 'js/demo/chart-bar-demo.js' %}"></script>
+
+<script>
+var ctx = document.getElementById("myBarChart");
+var myBarChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ["Total Tasks", "Finished Tasks", "Pending Tasks", "In_Progress"],
+    datasets: [{
+      label: "Tasks",
+      backgroundColor: [
+           "#4e73df",
+           "#1cc88a",
+           "#f6c23e",
+           "#5a5c69 ",
+
+
+
+      ],
+      hoverBackgroundColor: "#2e59d9",
+      borderColor: "#4e73df",
+      data: [
+        {{ total_task }},
+        {{ finished}},
+        {{pending}},
+        {{In_progress}}
+
+      ],
+    }],
+  },
+  options: {
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        left: 10,
+        right: 25,
+        top: 25,
+        bottom: 0
+      }
+    },
+    scales: {
+      xAxes: [{
+        time: {
+          unit: 'month'
+        },
+        gridLines: {
+          display: false,
+          drawBorder: false
+        },
+        ticks: {
+          maxTicksLimit: 4
+        },
+        maxBarThickness: 20,
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0,
+          stepSize:10,
+          maxTicksLimit: 10,
+          padding: 10,
+        },
+        gridLines: {
+          color: "rgb(234, 236, 244)",
+          zeroLineColor: "rgb(234, 236, 244)",
+          drawBorder: false,
+          borderDash: [2],
+          zeroLineBorderDash: [1]
+        }
+      }],
+    },
+    legend: {
+      display: false
+    },
+    tooltips: {
+      titleMarginBottom: 10,
+      titleFontColor: '#6e707e',
+      titleFontSize: 14,
+      backgroundColor: "rgb(255,255,255)",
+      bodyFontColor: "#858796",
+      borderColor: '#dddfeb',
+      borderWidth: 1,
+      xPadding: 15,
+      yPadding: 15,
+      displayColors: false,
+      caretPadding: 10,
+      callbacks: {
+        label: function(tooltipItem, chart) {
+          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+          return datasetLabel + ': ' + tooltipItem.yLabel;
+        }
+      }
+    },
+  }
+});
+</script>
+</div>
+{% endblock %}
+</div>

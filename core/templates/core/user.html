@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'core/status.html' %}
+
+<style>
+  .profile-pic {
+        max-width: 200px;
+        max-height: 200px;
+        margin: @ auto;
+        border-radius:58%;
+      }
+</style>
+
+<h3 class="text-primary">Profile</h3>
+<div class="row ">
+  <div class="col-md text-primary " style="display:flex; justify-content: space-between;">
+    <div class="card card-body">
+      <img class="profile-pic" src="{{request.user.staff.profile_pic.url}}">
+    </div>
+    <div class="card card-body col-sm-2 " style="text-align:center">
+      <h4 class="text-primary">Name</h4>
+      <hr>
+      <h6>{{request.user.staff.name}}</h6>
+      <hr>
+      <h4>Email</h4>
+      <hr>
+      <h6>{{request.user.staff.email}}</h6>
+      <hr>
+    </div>
+    <div class="card card-body col-sm-2 " style="text-align:center">
+      <h4>PHONE</h4>
+      <hr>
+      <h6>{{request.user.staff.phone}}</h6>
+      <hr>
+      <h4>Birth Date</h4>
+      <hr>
+      <h6>{{request.user.staff.birth_date}}</h6>
+    </div>
+    <div class="card card-body col-sm-3 align-items-center">
+      <h3>Position</h3>
+      <hr>
+      <h5>{{request.user.order.Title}}</h5>
+      <hr>
+    </div>
+  </div>
+</div>
+<hr>
+<br>
+<hr>
+<div class="row">
+  <div class="col-md">
+    <div class="card card-body">
+      <table class="table table sm ">
+        <tr>
+          <th>Task</th>
+          <th>category</th>
+          <th>Note</th>
+          <th>completion Date</th>
+          <th>Priority</th>
+          <th>status</th>
+          <th>Assigned_to</th>
+        </tr>
+
+        {% for task in tasks %}
+            <tr>
+              <td>{{task.title}}</td>
+              <td>{{task.category}}</td>
+              <td>{{task.note}}</td>
+              <td>{{task.Due_date}}</td>
+              <td>{{task.priority}}</td>
+              <td>{{task.status}}</td>
+              <td>
+
+              {% for staff_member in task.assigned_to.all %}
+                  {{ staff_member.name }}
+                  {% if not forloop.last%},{% endif %}
+                {% endfor %}
+
+              </td>
+            </tr>
+        {% endfor %}
+
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

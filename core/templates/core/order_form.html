@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card card-body">
+
+<form method="POST" action="">
+    {% csrf_token %}
+      {{formset}}
+      <hr>
+
+    <input type="submit" name="submit">
+</form>
+
+</div>
+    </div>
+<div class="col-md-4">
+
+</div>
+    <div class="col-md-4">
+    </div>
+</div>
+
+{% endblock %}

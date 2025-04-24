@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <br>
+
+<div class="row">
+  <div class="col-md">
+    <div class="card card-body">
+
+      <h5>Staff: {{staff.name}}</h5>
+      <hr>
+      <h3 style="text-align: center">Total Task</h3>
+      <hr>
+      <h5 style="text-align: center; ">{{task_count}}</h5>
+
+    </div>
+  </div>
+  <div class="col-md">
+    <div class="card card-body">
+       <h5>contact informtion</h5>
+       <hr>
+       <p>Email:  {{staff.email}}</p>
+       <p>phone:  {{staff.Phone}}</p>
+    </div>
+  </div>
+
+  <div class="col-md">
+    <div class="card card-body">
+      <h5>Work Order</h5>
+      <hr>
+
+       {% for order in orders %}
+            <h6 style="text-align: center; padding: 10px  "><b>position: </b><i>{{order.Title}}</i></h6>
+       {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="row">
+  <div class="col">
+    <div class="card card-body"  style="display: flex; align-items:center; justify-content: space-between;" >
+
+      <form method="GET" style="display: flex;">
+        {{myfilter.form}}
+
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+
+    </div>
+  </div>
+
+</div>
+<br>
+
+<div class="row">
+  <div class="col-md">
+    <div class="card card-body">
+      <table class="table table sm">
+        <tr>
+          <th>Task</th>
+          <th>category</th>
+          <th>Note</th>
+          <th>completion Date</th>
+          <th>Priority</th>
+          <th>status</th>
+          <th>Assigned_to</th>
+          <th>Remove</th>
+        </tr>
+
+        {% for task in tasks %}
+            <tr>
+              <td>{{task.title}}</td>
+              <td>{{task.category}}</td>
+              <td>{{task.note}}</td>
+              <td>{{task.Due_date}}</td>
+              <td>{{task.priority}}</td>
+              <td>{{task.status}}</td>
+              <td>
+
+              {% for staff_member in task.assigned_to.all %}
+                  {{ staff_member.name }}
+                  {% if not forloop.last%},{% endif %}
+                {% endfor %}
+
+              </td>
+                 <td><a class="btn btn-sm btn-danger" href="{% url 'delete_task' task.id %}" >Remove</a></td>
+            </tr>
+        {% endfor %}
+
+      </table>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

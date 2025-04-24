@@ -1,0 +1,86 @@
+<br>
+<div class="row">
+
+<!-- Total number of completed Task Card Example -->
+<div class="col-xl-3 col-md-6 mb-4" >
+<div class="card border-left-primary shadow h-100 py-2" id="Finished-Task">
+<div class="card-body">
+<div class="row no-gutters align-items-center">
+<div class="col mr-2">
+<div class="text-xs font-weight-bold text-light text-uppercase mb-1" style="font-weight:bold;">
+Finished Task </div>
+<div class="h5 mb-0 font-weight-bold text-gray-800">{{finished}}</div>
+</div>
+<div class="col-auto">
+<i class="fas fa-calendar fa-2x text-gray-300"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Total Task Card Example -->
+<div class="col-xl-3 col-md-6 mb-4" >
+<div class="card border-left-success shadow h-100 py-2" id="Total-Task">
+<div class="card-body">
+<div class="row no-gutters align-items-center">
+<div class="col mr-2">
+<div class="text-xs font-weight-bold text-light text-uppercase mb-1" style="font-weight:bold;">
+Total Task</div>
+<div class="h5 mb-0 font-weight-bold text-gray-800">{{total_task}}</div>
+</div>
+<div class="col-auto">
+<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Task Progress (Monthly) Card Example -->
+<div class="col-xl-3 col-md-6 mb-4">
+<div class="card border-left-info shadow h-100 py-2" id="In_progress">
+<div class="card-body">
+<div class="row no-gutters align-items-center">
+<div class="col mr-2">
+<div class="text-xs font-weight-bold text-info text-uppercase mb-1" style="font-weight:bold;">Track of Tasks Progress
+</div>
+<div class="row no-gutters align-items-center">
+<div class="col-auto">
+<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ In_progress_percent }}%</div>
+</div>
+<div class="col">
+<div class="progress progress-sm mr-2">
+<div class="progress-bar {{InProgess_color}}" role="progressbar"
+style="width: {{In_progress_percent}}%" aria-valuenow="{{In_progress_percent}}" aria-valuemin="0"
+aria-valuemax="100"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-auto">
+<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Pending Requests Card Example -->
+<div class="col-xl-3 col-md-6 mb-4">
+<div class="card border-left-warning shadow h-100 py-2" id="Pending-Task">
+<div class="card-body">
+<div class="row no-gutters align-items-center">
+<div class="col mr-2">
+<div class="text-xs font-weight-bold text-warning text-uppercase mb-1" style="font-weight:bold;">
+Pending Task</div>
+<div class="h5 mb-0 font-weight-bold text-gray-800">{{pending}}</div>
+</div>
+<div class="col-auto">
+<i class="fas fa-comments fa-2x text-gray-300"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
