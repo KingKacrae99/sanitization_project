@@ -9,3 +9,5 @@ def get_report(request,report_id):
         'report': report
     }
     return render(request,'core/santitation_report.html', context)
+
+def create_report(requset)

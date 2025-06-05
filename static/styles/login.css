@@ -5,22 +5,10 @@
 #bg-login-image,
 .carousel,
 .carousel-inner,
-.carousel-item,
-.carousel-item img {
-  height: 100%;
-}
-
-
-.bg-register-image {
-  background: url($register-image);
-  background-position: center;
-  background-size: cover;
-}
-
-.bg-password-image {
-  background: url($password-image);
-  background-position: center;
-  background-size: cover;
+.carousel-item {
+  height: 450px;
+  max-height: 450px;
+  overflow: hidden;
 }
 
 .carousel-item {
@@ -28,22 +16,10 @@
 }
 
 .carousel-item img {
-  object-fit: cover;
-  width: 100%;
-  display: block;
-  position: relative;
-  z-index: 0;
-}
-
-.carousel-item::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1;
+  object-fit: cover; /* Ensures image scales proportionally and fills box */
+  display: block;
 }
 
 form.user {
