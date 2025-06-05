@@ -1,19 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
-<div class="row">
-    <div class="col-md">
-        <div class="card card-body">
-
-            <form action="{% url 'create_task' %}" method="POST">
+<div class="container my-5 d-flex flex-column justify-content-center align-items-center" style="min-height: 50vh;">
+    <h2 class="h2 text-center"> Task Form</h2>
+    <div class="row w-100 ">
+        <div class="col-lg-6 col-md-12 col-sm-12 mx-auto border border-1 shadow rounded p-4">
+            <form action="{% url 'create_task' %}" method="POST" >
                 {% csrf_token %}
                 {{form.as_p}}
-                <hr>
-
-                <input type="submit" class="btn btn-sm btn-primary" name="submit">
+                <div class=" text-center my-3">
+                    <input type="submit" class="btn btn-primary" name="submit">
+                </div>
             </form>
-
         </div>
     </div>
 </div>

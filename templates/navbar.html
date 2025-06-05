@@ -1,0 +1,82 @@
+{% load static %}
+
+<style>
+  .greeting {
+       font-size:18px;
+       color: #fff;
+       margin-right:20px;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <img src="{% static 'images/logo.png' %}" style="width:65px; height:65px; padding:5px;">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+      <ul class="navbar-nav">
+        {% if request.user.is_staff %}
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'admin_dashboard' %}">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'Task' %}">Task</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'user-page' %}">Profile</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'profile' %}">Settings</a>
+        </li>
+      </ul>
+
+      <!-- Right-side controls -->
+      <div class="d-flex align-items-center">
+        <i class="fa fa-circle-user fs-2 text-white me-2"></i>
+        <span class="text-white me-3">Hello, {{ request.user.first_name }}</span>
+        
+        <button type="button" class="btn btn-white position-relative me-3" data-bs-toggle="modal" data-bs-target="#notificatioModal">
+          <i class="bi bi-bell-fill text-white"></i>
+          {% if notifications %}
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ total_unread }}
+          </span>
+          {% endif %}
+        </button>
+
+        <a class="btn btn-outline-light" href="{% url 'logout' %}">Logout</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="modal fade" id="notificatioModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-sm">
+    <div class="modal-content shadow-lg rounded-4">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="notificationModalLabel">Notifications</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-3" style="max-height: 300px;">
+        {% if notifications %}
+          {% for note in notifications %}
+            <div class="alert alert-secondary mb-2 py-2 px-3 rounded-3">
+              <small class="text-muted">{{ note.timestamp|date:"M d, Y H:i" }}</small><br>
+              <strong>{{ note.title }}</strong><br>
+              <span>{{ note.message }}</span>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p class="text-center text-muted mb-0">No new notifications</p>
+        {% endif %}
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

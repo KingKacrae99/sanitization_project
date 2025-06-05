@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home | Sanitization Mgt System{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/home.css' %}">
+<main class="mb-5 ">
+    <div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+    <!-- Indicators/dots -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+        </div>
+        
+        <!-- The slideshow/carousel -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'images/fulafia-image.webp' %}" alt="Permanent-campus" class="d-block" style="width:100%">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-caption">
+                    <h3>Welcome to the FuLafia Management System</h3>
+                    <p>Promoting a clean, safe and healthy university enviroment for all </p>
+                    <a href="" class="btn btn-md btn-sm  btn-xs btn-primary mt-2">Report Sanitation Issues</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{%static 'images/fulafia-image1.webp' %}" alt="sanitation-image" class="d-block" style="width:100%">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-caption">
+                    <h3 >@ Federal university of Lafia, enviromental hygiene is a must<span class="text-primary">!</span></h3>
+                    <p>See something unhygienic? Report it now.</p>
+                    <a href="" class="btn btn-sm btn-primary  mt-2">Report Now</a>
+                </div> 
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/fulafia-image2.webp' %}" alt="sanitation-image" class="d-block" style="width:100%">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-caption">
+                    <h3>Help keep Fulafia Clean at all time</h3>
+                    <p>cleanliness is next to Godliness</p>
+                    <a href="" class="btn btn-primary mt-2">Report Sanitation Issues</a>
+                </div>  
+            </div>
+        </div>
+    </div>
+    
+    <!-- Left and right controls/icons -->
+    <section class="container mt-5 d-flex flex-column align-items-center">
+        <h2 class="h2 text-center mb-4 text-primary ">About the System</h2>
+        <div class="row justify- content-center">
+            <div class="col-md-4 col-sm-12 d-flex justify-content-center align-items-center">
+                <img src="{% static 'images/public-cleaning.webp' %}" alt="Waste-Mgt">
+            </div>
+            <div class="col-md-8 col-sm-12 mt-2 p-5">
+                <p class="">
+                    The FuLafia Management System is designed to enhance the cleanliness and hygiene of the university environment.
+                     It allows students, staff, and visitors to report sanitation issues such as littering, broken facilities, 
+                     or any other concerns related to cleanliness. The system aims to promote a healthy and safe campus for everyone.
+                </p>
+                <p class="">
+                    By using this system, you can contribute to maintaining a clean and pleasant environment at FuLafia. Your reports will be directed to the appropriate authorities for prompt action.
+                </p>
+            </div>
+        </div>
+
+    </section>
+    <section class="container mt-5">
+        <h2 class="h2 text-center mb-4 text-primary">Features</h2>
+        <div class="row">
+            <div class="col-md-4 col-sm-12 text-center mb-4 d-flex flex-column justify-content-center align-items-center">
+                 <figure class="p-3 d-flex flex-column justify-content-center align-items-center">
+                    <img src="{%static 'images/user-friendly.webp' %}" class="my-1 border border-2">
+                    <figcaption>
+                        <h3 class="h3">User-Friendly Interface</h3>
+                        <p>Easy to navigate and report sanitation issues.</p>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-md-4 col-sm-12 text-center mb-4 d-flex flex-column justify-content-center align-items-center">
+                <figure class="p-3 d-flex flex-column justify-content-center align-items-center">
+                    <img src="{%static 'images/real-time-report.webp' %}" class="my-1 border border-2">
+                    <figcaption>
+                        <h3 class="h3">Real-Time Reporting</h3>
+                        <p>Submit reports instantly</p>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-md-4 col-sm-12 text-center d-flex flex-column justify-content-center align-items-center">
+                <figure class="p-3 d-flex flex-column justify-content-center align-items-center">
+                    <img src="{%static 'images/Community-engagement.webp' %}"class="my-1 border border-2">
+                    <figcaption>
+                        <h3 class="h3 ">Community Engagement</h3>
+                        <p>Encourages everyone to participate in maintaining cleanliness.</p>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+    <section class="container mt-5 d-flex flex-column align-items-center">
+        <h2 class="h2 text-center mb-4 text-primary">How It Works</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-6 col-sm-12 d-flex justify-content-center align-items-center">
+                <img src="{% static 'images/sanitation.webp' %}" alt="Sanitation" class="img-fluid">
+            </div>
+            <div class="col-lg-7 col-md-6 col-sm-12 p-5">
+                <div class="d-flex align-items-start  gap-3 mb-3 ">
+                    <img src="{% static 'images/navigate.svg' %}" width="34">
+                    <p class="">navigate to <a href="" class="text-primary">Sanitation form</a></p>
+                </div>
+                <div class="d-flex align-items-start gap-3 mb-3">
+                    <img src="{% static 'images/data_check.svg' %}" width="40">
+                    <p class="">Fill out form the sanitation complaint form and Submit the form</p>
+                </div>
+                <div class="d-flex align-items-start gap-3 mb-3">
+                    <img src="{% static 'images/notification_multiple.svg' %}" width="34">
+                    <p class=""> Appropriate authorities receives report</p>
+                </div>
+                <div class="d-flex align-items-start gap-3 mb-3">
+                    <img src="{% static 'images/group.svg' %}" width="34">
+                    <p class="">Cleaning staff is assigned</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container mt-5">
+        <h2 class="h2 text-center mb-4 text-primary">Get Involved</h2>
+        <p class="text-center">Join us in our mission to keep FuLafia clean and hygienic. Report any sanitation issues you encounter and help us create a better environment for all.</p>
+        <div class="text-center">
+            <a href="" class="btn btn-primary my-3">Report Sanitation Issues</a>
+        </div>
+    </section>
+</main>
+{% endblock %}

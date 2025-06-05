@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main>
+    <h1 class="text-center"> Sanititation Reports </h1>
+    <section class="d-flex flex-column justify-content-center align-items-center border border-1 rounded">
+        <img src="{{ report.image.url }}" alt="Report Image">
+        <h2 class="text-center mb-4 border-1 ">Report Title</h2>
+        <p class="text-center mb-2"><strong>Reporter Name</strong>{{ report.reporter_name }}</p>
+        <p class="text-center mb-2"><strong>Reporter User</strong>{{ report.reporter_user }}</p>
+        <p class="text-center mb-2"><strong>Description</strong>{{report.description }}</p>
+        <p class="text-center mb-2"><strong>Category</strong>{{ report.category }}</p>
+        <p class="text-center mb-2"><strong>Date</strong>{{ report.created_date }}</p>
+        <p class="text-center mb-2"><strong>Report</strong>{{ report.report }}</p>
+    </section>
+</main>
+{% endblock %}

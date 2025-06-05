@@ -1,71 +1,59 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-{% include 'core/status.html' %}
 
 <style>
   .profile-pic {
         max-width: 200px;
         max-height: 200px;
-        margin: @ auto;
+        margin:auto;
         border-radius:58%;
       }
 </style>
-
-<h3 class="text-primary">Profile</h3>
-<div class="row ">
-  <div class="col-md text-primary " style="display:flex; justify-content: space-between;">
-    <div class="card card-body">
-      <img class="profile-pic" src="{{request.user.staff.profile_pic.url}}">
+<main>
+    <h2 class=" h2 text-muted m-3">Profile</h2>
+    <div class="row mb-4">
+      <div class="col-md-4 col-sm-12 d-flex mx-auto justify-content-center align-items-center" >
+        <div class="justify-content-center">
+          {% if request.user.staff.profile_pic.url %}
+          <img class="image-fluid w-100 rounded-circle shadow" src="{{request.user.staff.profile_pic.url}}" alt="profile-pic">
+          {% else %}
+          <img class="image-fluid rounded-circle shadow" src="{% static 'images/user-icon.webp' %}">
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-8 col-sm-12 text-md-start text-sm-center text-center p-4  ">
+          <div class=" mb-1">
+            <p class="text-muted"><strong class="fs-5">Name</strong>{{request.user.staff.name}}</p>
+          </div>
+          <diV class="mb-1">
+            <p class="text-muted"><strong class="fs-5">Email</strong>{{request.user.staff.email}}</p>
+          </div>
+          <div class="mb-1">
+            <p class="text-muted"><strong class="fs-5">Phone</strong>{{request.user.staff.phone}}</p>
+          </div>
+           <div class="mb-1">
+            <p class="text-muted"><strong class="fs-5">Birth Date</strong>{{request.user.staff.birth_date}}</p>
+           </div>
+           <div class="mb-1">
+             <p class="text-muted"><strong class="fs-5">Position</strong>{{request.user.order.Title}}</p>
+           </div>
+      </div>
     </div>
-    <div class="card card-body col-sm-2 " style="text-align:center">
-      <h4 class="text-primary">Name</h4>
-      <hr>
-      <h6>{{request.user.staff.name}}</h6>
-      <hr>
-      <h4>Email</h4>
-      <hr>
-      <h6>{{request.user.staff.email}}</h6>
-      <hr>
-    </div>
-    <div class="card card-body col-sm-2 " style="text-align:center">
-      <h4>PHONE</h4>
-      <hr>
-      <h6>{{request.user.staff.phone}}</h6>
-      <hr>
-      <h4>Birth Date</h4>
-      <hr>
-      <h6>{{request.user.staff.birth_date}}</h6>
-    </div>
-    <div class="card card-body col-sm-3 align-items-center">
-      <h3>Position</h3>
-      <hr>
-      <h5>{{request.user.order.Title}}</h5>
-      <hr>
-    </div>
-  </div>
-</div>
-<hr>
-<br>
-<hr>
-<div class="row">
-  <div class="col-md">
-    <div class="card card-body">
-      <table class="table table sm ">
+    {% include 'core/status.html' %}
+      <table class="table table-sm  text-center mt-3">
         <tr>
           <th>Task</th>
-          <th>category</th>
-          <th>Note</th>
           <th>completion Date</th>
           <th>Priority</th>
           <th>status</th>
-          <th>Assigned_to</th>
         </tr>
 
         {% for task in tasks %}
             <tr>
-              <td>{{task.title}}</td>
-              <td>{{task.category}}</td>
-              <td>{{task.note}}</td>
+              <td class="">{{task.title}}</td>
+              <td class="d-sm-none">{{task.category}}</td>
+              <td class="d-sm-none">{{task.note}}</td>
               <td>{{task.Due_date}}</td>
               <td>{{task.priority}}</td>
               <td>{{task.status}}</td>
@@ -79,10 +67,7 @@
               </td>
             </tr>
         {% endfor %}
-
       </table>
-    </div>
-  </div>
-</div>
 
+</main>
 {% endblock %}

@@ -14,13 +14,13 @@ class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
 <div class="row">
     <!-- Create Staff Card -->
     <div class="col-xl-6 col-lg-6 mb-4">
-        <h5>Staffs</h5>
+        <h3 class="text-center">Staffs</h3>
         <hr>
         <div class="card shadow">
             <!-- Card Header -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-primary">
                 <!-- Button to Create Staff -->
-                <button class="btn text-light" style="font-weight:bold;">Create Staff</button>
+                <h4 class="text-center text-light">Staff</h4>
             </div>
             <!-- Card Body -->
             <div class="card-body">
@@ -53,12 +53,12 @@ class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
 
     <!-- Last 5 Work-Order Card -->
     <div class="col-xl-6 col-lg-6 mb-4">
-        <h5>Ranked 5 Work-Order</h5>
+        <h3 class="text-center">New Reports</h3>
         <hr>
         <div class="card shadow">
             <!-- Card Header -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-primary">
-                <a style="font-weight:bold;  text-align:center; " href="{% url 'create_order' %}"><h6 class="text-light" style=" text-align:center; ">create order</h6></a>
+                <a style="font-weight:bold;  text-align:center; " href="{ url 'create_task' }"><h6 class="text-light" style=" text-align:center; ">create </h6></a>
             </div>
             <!-- Card Body -->
             <div class="card-body">
@@ -75,14 +75,17 @@ class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                             <!-- Add more table headers as needed -->
                         </tr>
 
-                         {% for order in orders %}
+                         {% for report in reports %}
                             <tr>
-                                <th>{{order.assigned_to}}</th>
-                                <td>{{order.Title}}</td>
-                                <td>{{order.status}}</td>
-                                <td>{{order.tasks}}</td>
-                                <td><a class="btn btn-sm btn-primary" href="{% url 'update_order' order.id%}" >update</a></td>
-                                <td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id%}">Delete</a></td>
+                                {% if report.reporter_user %}
+                                <td>{{report.reporter_user}}</td>
+                                 {% else %}
+                                <td>{{ report.reporter_name }}</td>
+                                 {% endif %}
+                                <td>{{report.title}}</td>
+                                <td>{{report.created_date}}</td>
+                                <td><a class="btn btn-sm btn-primary" href="{ url 'update_order' order.id}" >view</a></td>
+                                <td><a class="btn btn-sm btn-danger" href="{ url 'delete_order' order.id }">Delete</a></td>
                             </tr>
                         {% endfor %}
 

@@ -17,7 +17,29 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from core.views import auth_views, user_views, staff_views, task_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('', auth_views.home, name='home'),
+    path('sanititation/register/', auth_views.registerPage, name='register'),
+    path('sanititation/login/', auth_views.loginPage, name='login'),
+    path('sanititation/logout/', auth_views.logoutUser, name='logout'),
+    path('sanititation/dashboard', staff_views.admin_Dashboard, name='admin_dashboard'),
+    path('sanitation/user/', staff_views.userPage, name='user-page'),
+    path('santitation/Task/', task_views.TaskList, name='Task'),
+
+        #task create and delete
+    path('create_task/', task_views.CreateTask, name='create_task'),
+    path('update_task/<str:pk>', task_views.UpdateTask,name='update_task'),
+    path('delete_task/<str:pk>/', task_views.deleteTask, name='delete_task'),
+    
+    #Staff
+    path('staff/<str:pk_test>/', staff_views.staff, name='staff'),
+    path('profile/', staff_views.profilesettings, name='profile'),
+
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
